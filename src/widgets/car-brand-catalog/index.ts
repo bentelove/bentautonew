@@ -1,0 +1,1 @@
+export { CarBrandCatalog } from './ui/CarBrandCatalog';

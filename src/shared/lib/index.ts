@@ -1,0 +1,1 @@
+export { useBrandIcon } from './useBrandIcon';
