@@ -9,6 +9,7 @@ import { SelectorPopular, typeSelectorPopular } from "../../../entities/car-bran
 import { CarCatalogGeneration } from "./CarCatalogGeneration";
 import { CarCatalogCarousel } from "./CarCatalogCarousel";
 import { CarGeneration } from "@/entities/car-brand/model/carBrand.types";
+import { CatalogNavigation } from "@/features/ui/CatalogNavigation";
 
 interface CarModelCatalogProps{
   modelId:number
@@ -32,9 +33,8 @@ export const CarCatalog = ({modelId}:CarModelCatalogProps) => {
   }
 
   return (
-    <div className="container mx-auto py-8">
-      <h2 className="text-2xl font-bold mb-6">Рассчитайте стоимость ТО для Вашего {model?.brand?.name} {model?.name} <Link href={`/brand/${model?.brandId}`} className="text-sm">Назад</Link></h2>
-      
+    <div className="container mx-auto py-8 px-4">
+      <CatalogNavigation links={[{href:'/',title:model?.brand?.name || ''},{href:'/brand/'+model?.brand?.id,title:model?.name || ''}]}></CatalogNavigation>
       <CarCatalogCarousel activeGeneration={activeGeneration} setActiveGeneration={setActiveGeneration} model={model}></CarCatalogCarousel>
 
       <CarCatalogGeneration activeGeneration={activeGeneration} setActiveGeneration={setActiveGeneration} model={model}></CarCatalogGeneration>

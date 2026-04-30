@@ -20,7 +20,8 @@ export interface CarModel {
     createdAt:string,
     updatedAt:string,
     generations: CarGeneration[],
-    brand: CarBrand | null
+    brand: CarBrand | null,
+    status: number
 }
 export interface CarGeneration{
     id:number,

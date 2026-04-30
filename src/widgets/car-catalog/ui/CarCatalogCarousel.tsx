@@ -30,9 +30,9 @@ export const CarCatalogCarousel = ({activeGeneration,setActiveGeneration,model }
   if (!model) return null;
 
   return (
-    <div className="relative">
+    <div className="relative bg-white p-4 rounded-lg border border-gray-200 mb-4 ">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-4 mb-4">
+        <div className="flex gap-4 ">
           {model.generations.map((gen) => (
             <div
               key={gen.id}
@@ -68,14 +68,14 @@ export const CarCatalogCarousel = ({activeGeneration,setActiveGeneration,model }
 
       <button
         onClick={scrollPrev}
-        className="absolute -left-12 cursor-pointer top-1/2 -translate-y-1/2 bg-gray-100 border border-gray-200 rounded-full p-2 hover:bg-gray-200"
+        className="absolute -left-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
       
       <button
         onClick={scrollNext}
-        className="absolute -right-12 cursor-pointer top-1/2 -translate-y-1/2 bg-gray-100 border border-gray-200 rounded-full p-2 hover:bg-gray-200"
+        className="absolute -right-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
       >
         <ChevronRight className="w-5 h-5 " />
       </button>

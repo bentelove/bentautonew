@@ -34,3 +34,6 @@ export const fetchCarBrand = async (brandId:number): Promise<CarBrand> => {
 export const fetchCarModel = async (modelId: number): Promise<CarModel> =>{
   return apiClient.get(API_ENDPOINTS.CAR_MODEL+modelId+'');
 }
+export const fetchCarGeneration = async (generationId: number): Promise<CarGeneration> =>{
+  return apiClient.get(API_ENDPOINTS.CAR_GENERATION+generationId+'');
+}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CarModelView } from "../../../entities/car-brand/ui/CarModelView";
 import { useMemo } from "react";
 import { SelectorPopular, typeSelectorPopular } from "../../../entities/car-brand/ui/SelectorPopular";
+import { CatalogNavigation } from "@/features/ui/CatalogNavigation";
 
 interface CarModelCatalogProps{
   brandId:number
@@ -28,9 +29,9 @@ export const CarModelCatalog = ({brandId}:CarModelCatalogProps) => {
     }
     
     // Фильтрация по популярности
-    /*if (popularModel) {
-      result = result.filter(model => model.isPopular);
-    }*/
+    if (popularModel) {
+      result = result.filter(model => model.status>=popularModel);
+    }
     
     return result;
   }, [allModels, search, popularModel]);
@@ -44,11 +45,11 @@ export const CarModelCatalog = ({brandId}:CarModelCatalogProps) => {
   }
 
   return (
-    <div className="bg-gray-100">
-      <div className="container mx-auto py-8">
-        <h2 className="text-2xl font-bold mb-6">Рассчитайте стоимость ТО для Вашего {brand?.name} <Link href='/' className="text-sm">Назад</Link></h2>
+    <div className="bg-gray-100 ">
+      <div className="container px-4 mx-auto py-8">
+        <CatalogNavigation links={[{href:'/',title:brand?.name || ''}]}></CatalogNavigation>
         <div className='p-4 bg-white rounded-lg shadow-2xl border border-gray-200'>
-          <SelectorPopular type={typeSelectorPopular.MODEL} search={search} setSearch={setSearch} popular={popularModel} setPopular={setPopularModel}></SelectorPopular>
+          <SelectorPopular type={typeSelectorPopular.MODEL} search={search} setSearch={setSearch} popular={popularModel} setPopular={setPopularModel} searchList={filteredModels.map((model)=>model.name)}></SelectorPopular>
           {filteredModels?.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
               Модели не найдены

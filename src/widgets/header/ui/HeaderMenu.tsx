@@ -6,7 +6,7 @@ export const HeaderMenu = () => {
   return (
     <nav>
         {topMenuItem.map((item) => (
-        <a key={item.href} href={item.href} className="mr-4">
+        <a key={item.href} href={item.href} className="mr-4 inline-block">
             {item.label}
         </a>
         ))}

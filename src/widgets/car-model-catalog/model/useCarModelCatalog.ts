@@ -26,7 +26,6 @@ export const useCarModelCatalog = (brandId:number | null) => {
     }
 
   }, [brandId]);
-  console.log(brand);
 
   const getBrandUrl = (brandId: number) => {
     return `/brand/${brandId}`;
