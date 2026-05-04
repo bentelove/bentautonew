@@ -20,10 +20,6 @@ export const useCarModelCatalog = (modelId:number | null) => {
               ...data,
               generations:data.generations
               .sort((gen1,gen2)=> gen2.startYear - gen1.startYear)
-              .map((gen)=> ({
-                ...gen,
-                modifications:[]
-              }))
             });
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Не удалось загрузить марки');

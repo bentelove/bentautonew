@@ -22,7 +22,7 @@ export const CarCatalog = ({modelId}:CarModelCatalogProps) => {
   useEffect(()=>{
     setActiveGeneration(model?.generations[0] || null)
   },[model])
-
+  console.log(activeGeneration);
 
   if (loading) {
     return <div className="text-center py-8">Загрузка моделей...</div>;
@@ -34,7 +34,7 @@ export const CarCatalog = ({modelId}:CarModelCatalogProps) => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <CatalogNavigation links={[{href:'/',title:model?.brand?.name || ''},{href:'/brand/'+model?.brand?.id,title:model?.name || ''}]}></CatalogNavigation>
+      <CatalogNavigation title={model?.brand?.name+' '+model?.name} links={[{href:'/',title:model?.brand?.name || ''},{href:'/brand/'+model?.brand?.id,title:model?.name || ''}]}></CatalogNavigation>
       <CarCatalogCarousel activeGeneration={activeGeneration} setActiveGeneration={setActiveGeneration} model={model}></CarCatalogCarousel>
 
       <CarCatalogGeneration activeGeneration={activeGeneration} setActiveGeneration={setActiveGeneration} model={model}></CarCatalogGeneration>

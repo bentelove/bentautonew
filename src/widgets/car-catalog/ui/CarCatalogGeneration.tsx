@@ -1,7 +1,5 @@
 import { CarGeneration, CarModel } from "@/entities/car-brand/model/carBrand.types"
 import Image from "next/image";
-import { useEffect } from "react"
-import { useCarGenerationCatalog } from "../model/useCarCatalogGeneration";
 import Link from "next/link";
 
 interface CatCatalogGenerationProps{
@@ -13,7 +11,6 @@ interface CatCatalogGenerationProps{
 
 export const CarCatalogGeneration = ({activeGeneration,setActiveGeneration,model}:CatCatalogGenerationProps) => {
 
-      const { generation, loading, error } = useCarGenerationCatalog(activeGeneration?.id || null);
 
     if(!activeGeneration){
         return <></>
@@ -45,8 +42,7 @@ export const CarCatalogGeneration = ({activeGeneration,setActiveGeneration,model
                 }
             </div>
             <div className="flex-4">
-                {!generation&&<div className="text-sm text-gray-500 text-center p-30">Загрузка модификаций {model?.brand?.name} {model?.name} {activeGeneration?.name}</div>}
-                <div className="">{generation?.modifications.map(mod=>(
+                <div className="">{activeGeneration?.modifications.map(mod=>(
                     <Link key={mod.id} href={`/car/${mod.id}`} className="flex items-center gap-2 even:bg-gray-50 hover:bg-gray-100 cursor-pointer p-2">
                         <div className="flex-2">
                             <div className="text-lg">{mod.name}</div>

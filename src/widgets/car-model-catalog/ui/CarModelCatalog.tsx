@@ -47,7 +47,7 @@ export const CarModelCatalog = ({brandId}:CarModelCatalogProps) => {
   return (
     <div className="bg-gray-100 ">
       <div className="container px-4 mx-auto py-8">
-        <CatalogNavigation links={[{href:'/',title:brand?.name || ''}]}></CatalogNavigation>
+        <CatalogNavigation title={brand?.name} links={[{href:'/',title:brand?.name || ''}]}></CatalogNavigation>
         <div className='p-4 bg-white rounded-lg shadow-2xl border border-gray-200'>
           <SelectorPopular type={typeSelectorPopular.MODEL} search={search} setSearch={setSearch} popular={popularModel} setPopular={setPopularModel} searchList={filteredModels.map((model)=>model.name)}></SelectorPopular>
           {filteredModels?.length === 0 ? (
