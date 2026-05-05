@@ -9,7 +9,6 @@ export const useCarModelCatalog = (modelId:number | null) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [year, setYear] = useState<number>(0);
-
   useEffect(() => {
     if(modelId){
         const loadBrands = async () => {

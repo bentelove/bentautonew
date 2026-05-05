@@ -11,7 +11,7 @@ interface Link{
 
 export const CatalogNavigation = ({title="автомобиля",links}:NavigationProps) =>{
     return <div className=''>
-        <h2 className="text-xl font-bold mb-2">Узнай стоимость обслуживания Вашего {title} за 60 секунд!</h2>
+        <h2 className="text-2xl font-bold mb-2">Узнай стоимость обслуживания Вашего {title} за 60 секунд!</h2>
         <div className="flex gap-2 mb-4">{links?.map((link,i)=>(
             <div key={i} className="py-1 px-2 bg-white rounded-full border border-gray-200 text-sm flex  items-center shadow-xs hover:shadow-sm transition-shadow">
                 <div className="p-2">{link.title}</div>

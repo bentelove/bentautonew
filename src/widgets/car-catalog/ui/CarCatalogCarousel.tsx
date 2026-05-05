@@ -43,13 +43,13 @@ export const CarCatalogCarousel = ({activeGeneration,setActiveGeneration,model }
                     <Image 
                         src={gen.image}
                         alt={`${model.brand?.name} ${model.name} ${gen.name}`}
-                        className="object-cover rounded-t-lg"
+                        className="object-cover rounded-t-lg h-40"
                         width={300}
-                        height={150}
+                        height={200}
                     />
                 }
                 {!gen.image&&
-                    <div className="py-20 bg-gradient-to-tr from-gray-200 from-0% to-gray-50 rounded-t-lg">
+                    <div className="py-18 bg-gradient-to-tr from-gray-200 from-0% to-gray-50 rounded-t-lg">
                         <div className="text-xs text-center text-gray-400">Изображение отсутствует</div>
                     </div>
                 }
@@ -68,14 +68,14 @@ export const CarCatalogCarousel = ({activeGeneration,setActiveGeneration,model }
 
       <button
         onClick={scrollPrev}
-        className="absolute -left-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
+        className="absolute left-5 lg:-left-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
       
       <button
         onClick={scrollNext}
-        className="absolute -right-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
+        className="absolute right-5 lg:-right-12 cursor-pointer top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-200"
       >
         <ChevronRight className="w-5 h-5 " />
       </button>

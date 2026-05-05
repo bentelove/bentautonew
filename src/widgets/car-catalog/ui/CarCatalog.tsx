@@ -22,7 +22,6 @@ export const CarCatalog = ({modelId}:CarModelCatalogProps) => {
   useEffect(()=>{
     setActiveGeneration(model?.generations[0] || null)
   },[model])
-  console.log(activeGeneration);
 
   if (loading) {
     return <div className="text-center py-8">Загрузка моделей...</div>;

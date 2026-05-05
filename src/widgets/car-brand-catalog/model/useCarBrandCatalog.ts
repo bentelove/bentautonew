@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchActiveCarBrands, type CarBrand } from '@/entities/car-brand';
-import { fetchAllCarBrands, fetchPopularCarBrands, fetchTestCarBrands } from '@/entities/car-brand/api/carBrandApi';
+import { fetchAllCarBrands, fetchCarBrands, fetchPopularCarBrands, fetchTestCarBrands } from '@/entities/car-brand/api/carBrandApi';
 
 export const useCarBrandCatalog = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ export const useCarBrandCatalog = () => {
     const loadBrands = async () => {
       try {
         setLoading(true);
-        const data = await fetchTestCarBrands(typeBrand);
+        const data = await fetchCarBrands();
         // Сортируем по имени
         const sorted = [...data].sort((a, b) => a.name.localeCompare(b.name));
         setBrands(sorted);

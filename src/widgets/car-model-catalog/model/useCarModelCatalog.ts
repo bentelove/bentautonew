@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CarBrand } from '@/entities/car-brand';
+import { CarBrand, CarModel } from '@/entities/car-brand';
 import { fetchCarBrand } from '@/entities/car-brand/api/carBrandApi';
 
 export const useCarModelCatalog = (brandId:number | null) => {
@@ -15,7 +15,12 @@ export const useCarModelCatalog = (brandId:number | null) => {
         try {
             setLoading(true);
             const data = await fetchCarBrand(brandId);
-            setBrand(data);
+            setBrand(
+              {
+                ...data,
+                model: data.model.map((model:CarModel)=>({...model,images:model.images.filter((image:string)=>(image && image.trim()!==''))}))
+              }
+            );
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Не удалось загрузить марки');
         } finally {
@@ -26,6 +31,8 @@ export const useCarModelCatalog = (brandId:number | null) => {
     }
 
   }, [brandId]);
+
+  console.log(brand);
 
   const getBrandUrl = (brandId: number) => {
     return `/brand/${brandId}`;

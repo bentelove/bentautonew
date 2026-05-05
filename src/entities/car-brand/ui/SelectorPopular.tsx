@@ -136,9 +136,9 @@ export const SelectorPopular = ({ type, search, setSearch, popular, setPopular ,
                     {type === typeSelectorPopular.BRAND && 'Все марки'}
                     {type === typeSelectorPopular.MODEL && 'Все модели'}
                 </button>
-                <div className="relative flex-1">
+                <div className="relative flex-1 pr-4">
                     <input 
-                        className="border-2 border-gray-200 ml-4 text-sm p-3 outline-none focus:border-red-500 hover:border-gray-400 w-full rounded-lg pr-9" 
+                        className="border-2 border-gray-200 ml-4 text-sm p-3 outline-none focus:border-red-500 hover:border-gray-400 w-full rounded-lg pr-4" 
                         type="text" 
                         placeholder={searchList.length==0?`Поиск ${typeSelectorPopular.BRAND?"марки":"модели"}`:displayText}
                         aria-label={`Поиск ${type === typeSelectorPopular.BRAND ? 'марки автомобиля' : 'модели'}`}

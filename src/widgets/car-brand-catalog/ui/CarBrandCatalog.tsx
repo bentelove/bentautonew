@@ -60,7 +60,7 @@ export const CarBrandCatalog = () => {
                     variant='catalog'
                     showLogo={true}
                     showStatus={popularBrands<2}
-                    countModels={brand.countModel&&brand.countModel>10?brand.countModel:null}
+                    countModels={brand.countModel}
                     href={getBrandUrl(brand.id)}
                 />
                 ))}

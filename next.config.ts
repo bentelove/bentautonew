@@ -5,10 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'taskkill228.github.io',
-        port: '',
-        pathname: '/photo_cars/**',
-        search: '',
+        hostname: '*',
       },
     ],
   },

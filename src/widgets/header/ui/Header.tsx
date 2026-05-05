@@ -83,7 +83,7 @@ export const Header = () => {
       {isMobile ? (
         <>
           {/* Верхний уровень - фиксированный */}
-          <div className={`fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md transition-all border-b-5 border-gray-100 duration-300 z-50 ${
+          <div className={`fixed top-0 left-0 right-0 bg-white/60 backdrop-blur-md transition-all duration-300 z-50 ${
             isMobileMenuOpen ? 'opacity-50 pointer-events-none' : ''
           }`}>
             <div className="px-4 py-3">

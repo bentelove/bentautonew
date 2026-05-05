@@ -22,18 +22,18 @@ export const fetchPopularCarBrands = async (): Promise<CarBrand[]> => {
 export const fetchTestCarBrands = async (type:number): Promise<CarBrand[]> => { //Тестовое API с использованием подменного количества моделей и логотипов
   let brands = await fetchCarBrands();
 
-  return brands.map(brand => {
-    const count = Math.floor(Math.random()*100);
-    const logo = (Math.random()>0.7?'ff':null)
-    return {...brand,countModel:count,logo:logo}
-  });
+  return brands;
 };
 export const fetchCarBrand = async (brandId:number): Promise<CarBrand> => {
-    return apiClient.get(API_ENDPOINTS.CAR_BRAND+brandId);
+  return apiClient.get(API_ENDPOINTS.CAR_BRAND+brandId);
 }
+
 export const fetchCarModel = async (modelId: number): Promise<CarModel> =>{
   return apiClient.get(API_ENDPOINTS.CAR_MODEL+modelId+'');
 }
 export const fetchCarGeneration = async (generationId: number): Promise<CarGeneration> =>{
   return apiClient.get(API_ENDPOINTS.CAR_GENERATION+generationId+'');
+}
+export const updateImageCarGeneration = async (generationId:number,url:string)=>{
+  return apiClient.put(API_ENDPOINTS.CAR_GENERATION_IMAGE_UPDATE+generationId,{image:url});
 }
