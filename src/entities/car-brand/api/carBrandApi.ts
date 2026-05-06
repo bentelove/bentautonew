@@ -1,5 +1,5 @@
 import { apiClient, API_ENDPOINTS } from '@/shared/api';
-import type { CarBrand, CarBrandsResponse, CarGeneration, CarModel } from '../model/carBrand.types';
+import type { CarBrand, CarBrandsResponse, CarGeneration, CarModel, CarModification } from '../model/carBrand.types';
 
 export const fetchCarBrands = async (): Promise<CarBrand[]> => {
   return apiClient.get(API_ENDPOINTS.CAR_BRANDS);
@@ -33,6 +33,9 @@ export const fetchCarModel = async (modelId: number): Promise<CarModel> =>{
 }
 export const fetchCarGeneration = async (generationId: number): Promise<CarGeneration> =>{
   return apiClient.get(API_ENDPOINTS.CAR_GENERATION+generationId+'');
+}
+export const fetchCarModification = async (modificationId: number): Promise<CarModification> =>{
+  return apiClient.get(API_ENDPOINTS.CAR_MODIFICATION+modificationId);
 }
 export const updateImageCarGeneration = async (generationId:number,url:string)=>{
   return apiClient.put(API_ENDPOINTS.CAR_GENERATION_IMAGE_UPDATE+generationId,{image:url});

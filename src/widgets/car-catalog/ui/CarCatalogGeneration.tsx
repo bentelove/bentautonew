@@ -19,11 +19,10 @@ export const CarCatalogGeneration = ({activeGeneration,setActiveGeneration,model
     },[activeGeneration])
 
     const hadleUpdateImage = ()=>{
+        if(!activeGeneration)return <></>
         const update = updateImageCarGeneration(activeGeneration?.id || 0, textImage);
         setActiveGeneration({...activeGeneration,image:textImage})
-        console.log(update);
     }
-    console.log(activeGeneration);
 
     if(!activeGeneration){
         return <></>

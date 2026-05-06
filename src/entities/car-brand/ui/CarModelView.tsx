@@ -16,7 +16,7 @@ export const CarModelView = ({ brandName, model }: props) => {
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     
     // Фильтруем пустые изображения
-    const validImages = model.images.filter(img => img && img.trim() !== '');
+    const validImages = model.images.filter(img => img && img.trim() !== '').reverse();
     
     // Автоматическое переключение изображений
     useEffect(() => {
@@ -24,7 +24,7 @@ export const CarModelView = ({ brandName, model }: props) => {
         if (validImages.length > 1 && !isHovering) {
             intervalRef.current = setInterval(() => {
                 setActiveImageIndex((prevIndex) => (prevIndex + 1) % validImages.length);
-            }, 8000); // Переключение каждые 3 секунды
+            }, 8000); 
         }
         
         // Очищаем интервал при размонтировании или когда наводим курсор
@@ -38,15 +38,12 @@ export const CarModelView = ({ brandName, model }: props) => {
     // Если нет изображений, показываем заглушку
     if (validImages.length === 0) {
         return (
-            <div className="">
+            <Link href={`/model/${model.id}`} className="border border-white hover:border-gray-200 hover:bg-gray-100 p-2 cursor-pointer rounded-lg">
                 <div className="py-15 rounded-lg bg-gray-100 text-center text-gray-400 text-xs h-35 flex items-center justify-center">
                     Изображение отсутствует
                 </div>
                 <div className="py-2">{brandName} {model.name}</div>
-                <Link className="p-2 bg-red-600 block text-white text-center rounded-lg text-sm" href={`/model/${model.id}`}>
-                    Подробнее
-                </Link>
-            </div>
+            </Link>
         );
     }
 
@@ -71,7 +68,7 @@ export const CarModelView = ({ brandName, model }: props) => {
     };
 
     return (
-        <div className="group">
+        <Link href={`/model/${model.id}`} className="group border border-white hover:border-gray-200 hover:bg-gray-100 p-2 cursor-pointer rounded-lg">
             {/* Контейнер с изображением и зонами */}
             <div 
                 className="relative rounded-lg overflow-hidden bg-gray-100"
@@ -131,12 +128,6 @@ export const CarModelView = ({ brandName, model }: props) => {
             </div>
 
             <div className="py-2 font-medium">{brandName} {model.name}</div>
-            <Link 
-                className="p-2 bg-red-600 block text-white text-center rounded-lg text-sm font-medium hover:bg-red-700 transition-colors" 
-                href={`/model/${model.id}`}
-            >
-                Подробнее
-            </Link>
 
             {/* Добавляем CSS анимацию */}
             <style jsx>{`
@@ -149,6 +140,6 @@ export const CarModelView = ({ brandName, model }: props) => {
                     }
                 }
             `}</style>
-        </div>
+        </Link>
     );
 };

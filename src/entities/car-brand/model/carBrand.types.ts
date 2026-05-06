@@ -34,6 +34,7 @@ export interface CarGeneration{
     createdAt:string,
     updatedAt:string,
     modifications:CarModification[]
+    model?:CarModel
 }
 export interface CarModification{
   id:number,
@@ -50,7 +51,8 @@ export interface CarModification{
   door: number,
   createdAt:string,
   updatedAt: string,
-  tecdocId: null
+  tecdocId: null,
+  generation?: CarGeneration
 }
 
 export interface CarBrandsResponse extends Array<CarBrand> {}

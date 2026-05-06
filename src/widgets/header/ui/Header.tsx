@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useHeader } from '../model/useHeader';
 import { HeaderMenu } from './HeaderMenu';
 import { Search } from './Search';
@@ -89,7 +90,7 @@ export const Header = () => {
             <div className="px-4 py-3">
                 <div className='flex gap-4 items-center'>
                     <div className="flex-1 py-4 text-lg font-bold shrink-0">
-                    Автосервис
+                    <Link href='/'>Автосервис</Link>
                     </div>
                     <div className='text-sm'>
                         +7 (8202) 60-23-22
@@ -161,7 +162,7 @@ export const Header = () => {
           
           <div className='container mx-auto px-4'>
             <div className="flex justify-between items-center gap-4 py-4">
-              <div className="text-xl font-bold shrink-0">Автосервис</div>
+              <div className="text-xl font-bold shrink-0"><Link href='/'>Автосервис</Link></div>
               <div className={`bg-red-600 text-white ${show ? 'py-3.5' : 'py-2'} px-6 font-bold text-sm rounded-xl cursor-pointer shrink-0 hover:bg-red-700 transition-colors`}>
                 Услуги
               </div>

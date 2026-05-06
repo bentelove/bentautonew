@@ -1,4 +1,5 @@
 import { CarCatalog } from "@/widgets/car-catalog/ui/CarCatalog";
+import { CarServices } from "@/widgets/car-services/ui/CarServices";
 import { Header } from "@/widgets/header";
 
 interface CarPageProps {
@@ -12,7 +13,7 @@ export default async function CarPage({ params }: CarPageProps) {
   
   return (
     <div className="bg-gray-100">
-        <CarCatalog modelId={parseInt(id)}></CarCatalog>
+        <CarServices modificationId={parseInt(id)}></CarServices>
     </div>
   );
 }
