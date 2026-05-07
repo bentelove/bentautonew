@@ -49,9 +49,14 @@ export const CarCatalogCarousel = ({activeGeneration,setActiveGeneration,model }
                     />
                 }
                 {!gen.image&&
-                    <div className="py-18 bg-gradient-to-tr from-gray-200 from-0% to-gray-50 rounded-t-lg">
-                        <div className="text-xs text-center text-gray-400">Изображение отсутствует</div>
-                    </div>
+                    
+                    <Image 
+                        src={'https://cdn.lemanapro.ru/lmru/image/upload/c_pad/q_auto/f_auto/w_1000/h_1000/v1652787845/lmcode/DLZGMi6I6U-l-DH6pf0JnQ/90384094.jpg'}
+                        alt={`${model.brand?.name} ${model.name} ${gen.name}`}
+                        className="object-cover rounded-t-lg h-40"
+                        width={300}
+                        height={200}
+                    />
                 }
                 
                 <div className="p-4">

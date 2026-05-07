@@ -39,8 +39,14 @@ export const CarModelView = ({ brandName, model }: props) => {
     if (validImages.length === 0) {
         return (
             <Link href={`/model/${model.id}`} className="border border-white hover:border-gray-200 hover:bg-gray-100 p-2 cursor-pointer rounded-lg">
-                <div className="py-15 rounded-lg bg-gray-100 text-center text-gray-400 text-xs h-35 flex items-center justify-center">
-                    Изображение отсутствует
+                <div className="relative h-35 w-full">
+                    <Image 
+                        src={'https://cdn.lemanapro.ru/lmru/image/upload/c_pad/q_auto/f_auto/w_1000/h_1000/v1652787845/lmcode/DLZGMi6I6U-l-DH6pf0JnQ/90384094.jpg'} 
+                        alt={`${brandName} ${model.name}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
+                        className="object-cover transition-opacity duration-200"
+                    />
                 </div>
                 <div className="py-2">{brandName} {model.name}</div>
             </Link>
