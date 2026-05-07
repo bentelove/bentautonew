@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  allowedDevOrigins:['192.168.0.10'],
+  allowedDevOrigins:['192.168.0.10','192.168.0.20'],
   async headers() {
     return [
       {

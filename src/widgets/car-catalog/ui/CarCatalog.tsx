@@ -32,7 +32,7 @@ export const CarCatalog = ({modelId}:CarModelCatalogProps) => {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="container mx-auto px-4">
       <CatalogNavigation title={model?.brand?.name+' '+model?.name} links={[{href:'/',title:model?.brand?.name || ''},{href:'/brand/'+model?.brand?.id,title:model?.name || ''}]}></CatalogNavigation>
       <CarCatalogCarousel activeGeneration={activeGeneration} setActiveGeneration={setActiveGeneration} model={model}></CarCatalogCarousel>
 

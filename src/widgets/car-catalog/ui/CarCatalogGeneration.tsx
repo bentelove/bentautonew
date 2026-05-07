@@ -47,11 +47,17 @@ export const CarCatalogGeneration = ({activeGeneration,setActiveGeneration,model
                         height={150}
                     />
                 }
+
+                        
                 
                 {!activeGeneration.image&&
-                    <div className="py-20 bg-gray-100">
-                        <div className="text-xs text-center text-gray-400">Изображение отсутствует</div>
-                    </div>
+                    <Image 
+                        src={'https://cdn.lemanapro.ru/lmru/image/upload/c_pad/q_auto/f_auto/w_1000/h_1000/v1652787845/lmcode/DLZGMi6I6U-l-DH6pf0JnQ/90384094.jpg'}
+                        alt={`${model?.brand?.name} ${model?.name} ${activeGeneration.name}`}
+                        className="object-cover"
+                        width={300}
+                        height={150}
+                    />
                 }
                 <div className="flex flex-col gap-2">
                     <input onChange={(e)=>{setTextImage(e.target.value)}} className="flex-2 p-2 border border-gray-300 outline-none" type="text" value={textImage}/>
@@ -61,11 +67,11 @@ export const CarCatalogGeneration = ({activeGeneration,setActiveGeneration,model
             <div className="flex-4">
                 <div className="">{activeGeneration?.modifications.map(mod=>(
                     <Link key={mod.id} href={`/car/${mod.id}`} className="flex items-center gap-2 even:bg-gray-50 hover:bg-gray-100 cursor-pointer lg:p-2 p-4">
-                        <div className="flex-2">
+                        <div className="flex-3">
                             <div className="text-lg">{mod.name}</div>
                             <div className="text-sm">{mod.fuelType} / {mod.kppType} / {mod.driveType} привод</div>
                         </div>
-                        <div className="flex-1 flex gap-2 flex-col lg:flex-row">
+                        <div className="flex-2 flex gap-2 flex-col lg:flex-row">
                             <div className="flex-1 text-lg">{mod.bodyType} {mod.door} дв.</div>
                             <div className="flex-1 text-lg">{mod.enginePower} л.с. </div>
                         </div>
