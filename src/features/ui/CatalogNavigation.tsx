@@ -13,7 +13,7 @@ interface Link{
 export const CatalogNavigation = ({serviceName='обслуживания',title="автомобиля",links}:NavigationProps) =>{
     return <div className='py-8 flex flex-col gap-2'>
         <h2 className="text-2xl font-bold">Узнай стоимость {serviceName} Вашего {title} за 60 секунд!</h2>
-        {serviceName!=='обслуживания'&&<div className="text-sm text-gray-700">а также 85 других услуг</div>}
+        {serviceName!=='обслуживания'&&<div className="text-sm text-gray-700">А также 85 других услуг</div>}
         {links&&<div className="flex gap-2">{links?.map((link,i)=>(
             <div key={i} className="py-1 px-2 bg-white rounded-full border border-gray-200 text-sm flex  items-center shadow-xs hover:shadow-sm transition-shadow">
                 <div className="p-2">{link.title}</div>

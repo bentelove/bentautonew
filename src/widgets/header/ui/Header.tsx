@@ -143,7 +143,7 @@ export const Header = () => {
         /* === ДЕСКТОПНАЯ ВЕРСИЯ === */
         <header className={`bg-white/80 backdrop-blur-md z-50 sticky top-0 shadow-sm`}>
           {show && (
-            <div className='bg-black/10 backdrop-blur-sm py-2'>
+            <div className='bg-black/10  py-2'>
               <div className='container mx-auto px-4'>
                 <div className="flex justify-between items-center text-sm">
                   <div className="flex items-center gap-2">

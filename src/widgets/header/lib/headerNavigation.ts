@@ -1,7 +1,7 @@
 export const workMenuItems = [
   { href: '/zamena-masla', label: 'Замена масла и ТО' },
   { href: '/diagnostika', label: 'Диагностика' },
-  { href: '/shinomontaj', label: 'Шиномонтаж' },
+  { href: '/shinomontazh', label: 'Шиномонтаж' },
   { href: '/shod-razval', label: 'Сход-развал' },
 ] as const;
 
