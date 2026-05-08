@@ -1,3 +1,5 @@
+import { CarBrandCatalog } from "@/widgets/car-brand-catalog";
+import { CarCatalog } from "@/widgets/car-catalog/ui/CarCatalog";
 import { CarModelCatalog } from "@/widgets/car-model-catalog/ui/CarModelCatalog";
 import { Header } from "@/widgets/header";
 
@@ -11,7 +13,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
   const { id } = await params;
   
   return (
-    <div>
+    <div className="bg-gray-100">
         <CarModelCatalog brandId={parseInt(id)}></CarModelCatalog>
     </div>
   );
