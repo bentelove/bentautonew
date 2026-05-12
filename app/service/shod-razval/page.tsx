@@ -114,7 +114,7 @@ export default async function ShodRazval() {
       
       <div className="container px-4 mx-auto">
         <div className="py-12">
-            <CarBrandCatalog serviceName="сход-развала для" />
+            <CarBrandCatalog serviceUrl="shod-razval" serviceName="сход-развала для" />
         </div>
       </div>
 

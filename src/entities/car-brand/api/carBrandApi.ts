@@ -27,9 +27,15 @@ export const fetchTestCarBrands = async (type:number): Promise<CarBrand[]> => { 
 export const fetchCarBrand = async (brandId:number): Promise<CarBrand> => {
   return apiClient.get(API_ENDPOINTS.CAR_BRAND+brandId);
 }
+export const fetchCarBrandByUrl = async (brandUrl:string): Promise<CarBrand> => {
+  return apiClient.get(API_ENDPOINTS.CAR_BRAND_URL+brandUrl);
+}
 
 export const fetchCarModel = async (modelId: number): Promise<CarModel> =>{
   return apiClient.get(API_ENDPOINTS.CAR_MODEL+modelId+'');
+}
+export const fetchCarModelByUrl = async (brandUrl: string,modelUrl:string): Promise<CarModel> =>{
+  return apiClient.get(`${API_ENDPOINTS.CAR_BRAND_URL}${brandUrl}/${modelUrl}`);
 }
 export const fetchCarGeneration = async (generationId: number): Promise<CarGeneration> =>{
   return apiClient.get(API_ENDPOINTS.CAR_GENERATION+generationId+'');

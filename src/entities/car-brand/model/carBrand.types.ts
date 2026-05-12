@@ -7,6 +7,7 @@ export interface CarBrand {
   createdAt: string;
   updatedAt: string;
   tecdocBrandId: number | null;
+  url:string;
   model:CarModel[];  //Потом по хорошему поменять на models
 
   //В перспективе
@@ -22,7 +23,8 @@ export interface CarModel {
     generations: CarGeneration[],
     brand: CarBrand | null,
     status: number,
-    images: string[]
+    images: string[],
+    url:string
 }
 export interface CarGeneration{
     id:number,
@@ -34,7 +36,8 @@ export interface CarGeneration{
     createdAt:string,
     updatedAt:string,
     modifications:CarModification[]
-    model?:CarModel
+    model?:CarModel,
+    url:string
 }
 export interface CarModification{
   id:number,

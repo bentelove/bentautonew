@@ -9,11 +9,13 @@ import { SelectorPopular, typeSelectorPopular } from "../../../entities/car-bran
 import { CatalogNavigation } from "@/features/ui/CatalogNavigation";
 
 interface CarModelCatalogProps{
-  brandId:number
+  brandId?:number,
+  brandUrl?:string,
+  serviceUrl?:string
 }
 
-export const CarModelCatalog = ({brandId}:CarModelCatalogProps) => {
-  const { brand, popularModel, setPopularModel, search, setSearch, models:allModels, loading, error } = useCarModelCatalog(brandId);
+export const CarModelCatalog = ({brandId,brandUrl,serviceUrl='all'}:CarModelCatalogProps) => {
+  const { brand, popularModel, setPopularModel, search, setSearch, models:allModels, loading, error } = useCarModelCatalog(brandId,brandUrl,serviceUrl);
 
   const filteredModels = useMemo(() => {
     if (!allModels) return [];
@@ -43,30 +45,32 @@ export const CarModelCatalog = ({brandId}:CarModelCatalogProps) => {
   if (error) {
     return <div className="text-center py-8 text-red-500">Ошибка: {error}</div>;
   }
-
-  return (
-    <div className="bg-gray-100 ">
-      <div className="container px-4 mx-auto">
-        <CatalogNavigation title={brand?.name} links={[{href:'/',title:brand?.name || ''}]}></CatalogNavigation>
-        <div className='p-4 bg-white rounded-lg shadow-2xl border border-gray-200'>
-          <SelectorPopular type={typeSelectorPopular.MODEL} search={search} setSearch={setSearch} popular={popularModel} setPopular={setPopularModel} searchList={filteredModels.map((model)=>model.name)}></SelectorPopular>
-          {filteredModels?.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">
-              Модели не найдены
+  if(brand){
+    return (
+      <div className="bg-gray-100 pb-10 ">
+        <div className="container px-2 mx-auto ">
+          <CatalogNavigation title={brand?.name} links={[{href:'/',title:brand?.name || ''}]}></CatalogNavigation>
+          <div className='p-4 bg-white rounded-lg shadow-2xl border border-gray-200 '>
+            <SelectorPopular type={typeSelectorPopular.MODEL} search={search} setSearch={setSearch} popular={popularModel} setPopular={setPopularModel} searchList={filteredModels.map((model)=>model.name)}></SelectorPopular>
+            {filteredModels?.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                Модели не найдены
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                {filteredModels?.map((model: CarModel) => (
+                  <CarModelView 
+                    key={model.id} 
+                    serviceUrl={serviceUrl}
+                    brand={brand} 
+                    model={model}
+                  />
+                ))}
+              </div>
+            )}
             </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-              {filteredModels?.map((model: CarModel) => (
-                <CarModelView 
-                  key={model.id} 
-                  brandName={brand?.name || ''} 
-                  model={model}
-                />
-              ))}
-            </div>
-          )}
-          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };

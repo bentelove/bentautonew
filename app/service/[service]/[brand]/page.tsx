@@ -3,16 +3,17 @@ import { Header } from "@/widgets/header";
 
 interface BrandPageProps {
   params: {
-    id: string;
+    brand: string;
+    service:string;
   };
 }
 
 export default async function BrandPage({ params }: BrandPageProps) {
-  const { id } = await params;
+  const { brand,service } = await params;
   
   return (
     <div className="">
-        <CarModelCatalog brandId={parseInt(id)}></CarModelCatalog>
+        <CarModelCatalog serviceUrl={service} brandUrl={brand}></CarModelCatalog>
     </div>
   );
 }

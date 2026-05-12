@@ -5,15 +5,16 @@ import { Header } from "@/widgets/header";
 interface ModelPageProps {
   params: {
     id: string;
+    service: string;
   };
 }
 
 export default async function ModelPage({ params }: ModelPageProps) {
-  const { id } = await params;
+  const { id,service } = await params;
   
   return (
     <div className="bg-gray-100">
-        <CarServices modificationId={parseInt(id)}></CarServices>
+        <CarServices serviceUrl={service} modificationId={parseInt(id)}></CarServices>
     </div>
   );
 }

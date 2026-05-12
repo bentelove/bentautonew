@@ -9,7 +9,7 @@ export default function HomePage() {
       description: 'Замена моторного масла и масляного фильтра с гарантией качества. Подберем масло по допускам вашего авто.',
       icon: '🛢️',
       time: '30 мин',
-      price: 'от 500 ₽'
+      price: 'от 1 400 ₽'
     },
     {
       href: '/service/diagnostika',
@@ -17,7 +17,7 @@ export default function HomePage() {
       description: 'Слесарная диагностика ходовой части, подвески, тормозной системы и рулевого управления.',
       icon: '🔧',
       time: '30 мин',
-      price: 'от 800 ₽'
+      price: 'от 1 050 ₽'
     },
     {
       href: '/service/shinomontazh',
@@ -33,7 +33,7 @@ export default function HomePage() {
       description: 'Компьютерная регулировка углов установки колес на 3D-стенде с распечаткой параметров.',
       icon: '⚙️',
       time: '30 мин',
-      price: 'от 1 000 ₽'
+      price: 'от 2 000 ₽'
     }
   ];
   const bannerSlides: BannerSlide[] = [

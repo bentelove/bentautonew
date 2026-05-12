@@ -111,7 +111,7 @@ export default async function Shinomontazh() {
       
       <div className="container px-4 mx-auto">
         <div className="py-12">
-            <CarBrandCatalog serviceName="шиномонтажа для" />
+            <CarBrandCatalog serviceUrl="shinomontazh" serviceName="шиномонтажа для" />
         </div>
       </div>
 

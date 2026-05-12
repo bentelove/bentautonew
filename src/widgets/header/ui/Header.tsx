@@ -14,33 +14,119 @@ export const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const bottomMenuRef = useRef<HTMLDivElement>(null);
+  
+  // Состояния для свайпа
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1038);
     };
     
     checkMobile();
     window.addEventListener('resize', checkMobile);
     
+    // Проверяем, показывали ли подсказку
+    const hintShown = localStorage.getItem('swipeHintShown');
+    if (!hintShown && isMobile) {
+      setShowHint(true);
+      setTimeout(() => {
+        setShowHint(false);
+        localStorage.setItem('swipeHintShown', 'true');
+      }, 5000);
+    }
+    
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [isMobile]);
+
+  // Глобальные обработчики свайпа
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleGlobalTouchStart = (e: TouchEvent) => {
+      const touchX = e.targetTouches[0].clientX;
+      const touchY = e.targetTouches[0].clientY;
+      const windowWidth = window.innerWidth;
+      
+      // Проверяем, что свайп начался в правой части экрана (последние 50px)
+      // и меню закрыто
+      if (touchX > windowWidth - 50 && !isMobileMenuOpen) {
+        setTouchStartX(touchX);
+        setTouchStartY(touchY);
+        setIsSwiping(true);
+      }
+    };
+
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (!isSwiping || isMobileMenuOpen) return;
+      
+      const currentX = e.targetTouches[0].clientX;
+      const currentY = e.targetTouches[0].clientY;
+      const diffX = touchStartX - currentX;
+      const diffY = Math.abs(touchStartY - currentY);
+      
+      // Проверяем, что свайп горизонтальный (вертикальное смещение меньше 50px)
+      if (diffY < 50 && diffX > 30) {
+        e.preventDefault();
+        setIsMobileMenuOpen(true);
+        setIsSwiping(false);
+        setTouchStartX(0);
+      }
+    };
+
+    const handleGlobalTouchEnd = () => {
+      setIsSwiping(false);
+      setTouchStartX(0);
+    };
+
+    // Добавляем обработчики на весь документ
+    document.addEventListener('touchstart', handleGlobalTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
+    document.addEventListener('touchend', handleGlobalTouchEnd);
+
+    return () => {
+      document.removeEventListener('touchstart', handleGlobalTouchStart);
+      document.removeEventListener('touchmove', handleGlobalTouchMove);
+      document.removeEventListener('touchend', handleGlobalTouchEnd);
+    };
+  }, [isMobile, isMobileMenuOpen, isSwiping, touchStartX, touchStartY]);
+
+  // Обработчики свайпа для закрытия меню
+  const handleMenuTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleMenuTouchMove = (e: React.TouchEvent) => {
+    if (!isMobileMenuOpen) return;
+    
+    const currentX = e.targetTouches[0].clientX;
+    const diff = currentX - touchStartX;
+    
+    // Если свайп вправо более чем на 50px, закрываем меню
+    if (diff > 50) {
+      setIsMobileMenuOpen(false);
+      setTouchStartX(0);
+    }
+  };
+
+  const handleMenuTouchEnd = () => {
+    setTouchStartX(0);
+  };
 
   // Анимация приветствия для нижнего меню
   useEffect(() => {
     if (isMobile && bottomMenuRef.current && !hasAnimated) {
       const menu = bottomMenuRef.current;
-      
-      // Сохраняем оригинальный scrollLeft
       const originalScrollLeft = menu.scrollLeft;
       
-      // Плавно скроллим вправо
       menu.scrollTo({
         left: menu.scrollWidth - menu.clientWidth,
         behavior: 'smooth'
       });
       
-      // Через 1 секунду возвращаемся обратно
       const timeout = setTimeout(() => {
         if (menu) {
           menu.scrollTo({
@@ -70,10 +156,18 @@ export const Header = () => {
 
   return (
     <>
-      {/* Оверлей поверх всего контента, включая хедер */}
+      {/* Глобальный оверлей для обработки свайпов */}
+      {isMobile && !isMobileMenuOpen && (
+        <div 
+          className="fixed right-0 top-0 w-12 h-full z-[100] pointer-events-auto"
+          style={{ touchAction: 'pan-y' }}
+        />
+      )}
+
+      {/* Оверлей для закрытия меню */}
       {isMobile && (
         <div 
-          className={`fixed inset-0 backdrop-blur-md bg-black/40 transition-all duration-300 z-[100] ${
+          className={`fixed inset-0 backdrop-blur-md bg-black/40 transition-all duration-300 z-[101] ${
             isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -84,9 +178,11 @@ export const Header = () => {
       {isMobile ? (
         <>
           {/* Верхний уровень - фиксированный */}
-          <div className={`fixed top-0 left-0 right-0 bg-white/60 backdrop-blur-md transition-all duration-300 z-50 ${
-            isMobileMenuOpen ? 'opacity-50 pointer-events-none' : ''
-          }`}>
+          <div 
+            className={`fixed top-0 left-0 right-0 bg-white/60 backdrop-blur-md transition-all duration-300 z-50 ${
+              isMobileMenuOpen ? 'opacity-50 pointer-events-none' : ''
+            }`}
+          >
             <div className="px-4 py-3">
                 <div className='flex gap-4 items-center'>
                     <div className="flex-1 py-4 text-lg font-bold shrink-0">
@@ -97,15 +193,13 @@ export const Header = () => {
                     </div>
                 </div>
               <div className="flex items-center justify-between gap-2">
-                {/* Логотип */}
-
                 {/* Поиск */}
                 <Search show={show} />
 
                 {/* Бургер-меню */}
                 <button 
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="p-1 hover:bg-gray-100 rounded-lg transition-colors relative z-[101] shrink-0"
+                  className="p-1 hover:bg-gray-100 rounded-lg transition-colors relative z-[102] shrink-0"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     {isMobileMenuOpen ? (
@@ -180,15 +274,25 @@ export const Header = () => {
         </header>
       )}
 
-      {/* Мобильное бургер-меню */}
+      {/* Мобильное бургер-меню с поддержкой свайпа */}
       {isMobile && (
         <div 
           className={`fixed right-0 top-0 h-full w-80 bg-white backdrop-blur-xs shadow-2xl z-[102] transition-all duration-300 transform ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
+          onTouchStart={handleMenuTouchStart}
+          onTouchMove={handleMenuTouchMove}
+          onTouchEnd={handleMenuTouchEnd}
         >
           {/* Декоративный верхний градиент */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500" />
+          
+          {/* Индикатор свайпа для закрытия */}
+          {isMobileMenuOpen && (
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gray-300 rounded-r-full">
+              <div className="w-full h-full bg-gray-400 rounded-r-full animate-pulse" />
+            </div>
+          )}
           
           <div className="p-4">
             <div className='flex items-center justify-between mb-4 pb-4 border-b border-gray-200'>
@@ -224,6 +328,44 @@ export const Header = () => {
                 Войти в личный кабинет
               </button>
             </div>
+
+            {/* Подсказка о свайпе */}
+            {isMobileMenuOpen && (
+              <div className="mt-8 pt-4 text-center text-xs text-gray-400 border-t border-gray-100">
+                <div className="flex items-center justify-center gap-1">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  <span>Свайпните вправо, чтобы закрыть</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Глобальная подсказка о свайпе */}
+      {showHint && isMobile && !isMobileMenuOpen && (
+        <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-[200] animate-slide-in">
+          <div className="bg-black/90 backdrop-blur-sm text-white px-4 py-3 rounded-l-xl text-sm flex items-center gap-3 shadow-xl">
+            <div className="animate-bounce">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+            <div>
+              <div className="font-semibold">Свайпните влево</div>
+              <div className="text-xs text-gray-300">чтобы открыть меню</div>
+            </div>
+            <button 
+              className="ml-2 text-white/50 hover:text-white transition-colors"
+              onClick={() => {
+                setShowHint(false);
+                localStorage.setItem('swipeHintShown', 'true');
+              }}
+            >
+              ✕
+            </button>
           </div>
         </div>
       )}
@@ -235,6 +377,21 @@ export const Header = () => {
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
+        }
+        
+        @keyframes slideIn {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slide-in {
+          animation: slideIn 0.3s ease-out;
         }
       `}</style>
     </>

@@ -1,5 +1,6 @@
 export const API_ENDPOINTS = {
   CAR_BRANDS: '/brand',
+  CAR_BRAND_URL: '/car/',
   CAR_BRAND: '/brand/',
   CAR_MODEL:'/model/',
   CAR_GENERATION:'/generation/',

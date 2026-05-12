@@ -113,7 +113,7 @@ export default async function Diagnostika() {
       
       <div className="container px-4 mx-auto">
         <div className="py-12">
-            <CarBrandCatalog />
+            <CarBrandCatalog serviceUrl="diagnostika" />
         </div>
       </div>
 

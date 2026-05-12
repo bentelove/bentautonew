@@ -6,11 +6,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { CatalogNavigation } from '@/features/ui/CatalogNavigation';
 
 interface CarBrandCatalogProps{
-  serviceName?:string
+  serviceName?:string;
+  serviceUrl?:string;
 }
 
-export const CarBrandCatalog = ({serviceName}:CarBrandCatalogProps) => {
-  const { brands:allBrands, search, setSearch, popularBrands, setPopularBrands, loading, error, getBrandUrl } = useCarBrandCatalog();
+export const CarBrandCatalog = ({serviceName,serviceUrl='all'}:CarBrandCatalogProps) => {
+  const { brands:allBrands, search, setSearch, popularBrands, setPopularBrands, loading, error, getBrandUrl } = useCarBrandCatalog(serviceUrl);
 
   const filteredBrands = useMemo(() => {
       if (!allBrands) return [];
@@ -50,7 +51,7 @@ export const CarBrandCatalog = ({serviceName}:CarBrandCatalogProps) => {
     return <div className="text-center py-8 text-red-500">Ошибка: {error}</div>;
   }
   return (
-    <div className='pb-12'>
+    <div className='pb-12 mb-10'>
       <CatalogNavigation serviceName={serviceName}></CatalogNavigation>
       <div className='p-4 bg-white rounded-lg shadow-2xl border border-gray-200'>
         <SelectorPopular type={typeSelectorPopular.BRAND} search={search} setSearch={setSearch} popular={popularBrands} setPopular={setPopularBrands} searchList={filteredBrands.map(brand=>brand.name)}></SelectorPopular>
@@ -63,7 +64,7 @@ export const CarBrandCatalog = ({serviceName}:CarBrandCatalogProps) => {
                 showLogo={true}
                 showStatus={popularBrands<2}
                 countModels={brand.countModel}
-                href={getBrandUrl(brand.id)}
+                href={getBrandUrl(brand.url)}
             />
             ))}
         </div>

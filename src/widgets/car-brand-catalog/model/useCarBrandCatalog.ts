@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { fetchActiveCarBrands, type CarBrand } from '@/entities/car-brand';
 import { fetchAllCarBrands, fetchCarBrands, fetchPopularCarBrands, fetchTestCarBrands } from '@/entities/car-brand/api/carBrandApi';
 
-export const useCarBrandCatalog = () => {
+export const useCarBrandCatalog = (serviceUrl:string) => {
   const router = useRouter();
   const [brands, setBrands] = useState<CarBrand[]>([]);
   const [popularBrands,setPopularBrands] = useState<number>(0);
@@ -31,8 +31,8 @@ export const useCarBrandCatalog = () => {
     loadBrands();
   }, []);
 
-  const getBrandUrl = (brandId: number) => {
-    return `/brand/${brandId}`;
+  const getBrandUrl = (brandUrl: string) => {
+    return `/service/${serviceUrl}/${brandUrl}`;
   };
 
   return { brands, popularBrands,setPopularBrands, search, setSearch, loading, error, getBrandUrl, typeBrand, setTypeBrand };

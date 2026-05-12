@@ -112,7 +112,7 @@ export default async function ZamenaMasla() {
       
       <div className="container px-4 mx-auto">
         <div className="py-12">
-            <CarBrandCatalog serviceName="замены масла для" />
+            <CarBrandCatalog serviceUrl="zamena-masla" serviceName="замены масла для" />
         </div>
       </div>
 
