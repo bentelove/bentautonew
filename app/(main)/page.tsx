@@ -47,7 +47,7 @@ export default function HomePage() {
       imageUrl: 'https://www.timeout.ru/wp-content/uploads/places/4edfd3061b8a94d6790a1ff572ae501c.jpg',
       bgColor: '#0f172a',
       textColor: 'text-white',
-      accentColor: 'bg-red-600 hover:bg-red-700 text-white',
+      accentColor: 'bg-red-600/60 backdrop-blur-sm hover:bg-red-700 text-white',
       customContent: (
         <div className="flex gap-4 mt-4">
           <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2 text-center">
@@ -65,13 +65,13 @@ export default function HomePage() {
       id: 2,
       title: 'Замена масла за 30 минут',
       subtitle: 'Качественные масла и фильтры в наличии',
-      description: 'Motul, Shell, Castrol, LIQUI MOLY и другие бренды. Работаем с вашим маслом.',
+      description: 'Motul, Shell, Castrol, LIQUI MOLY и другие бренды.',
       buttonText: 'Узнать стоимость',
       buttonLink: '/service/zamena-masla',
       imageUrl: 'https://formulamotors.ru/upload/resize_cache/webp/images/pages/1.webp',
       bgColor: '#1a1a2e',
       textColor: 'text-white',
-      accentColor: 'bg-red-600 hover:bg-red-700 text-white',
+      accentColor: 'bg-red-600/60 backdrop-blur-sm  hover:bg-red-700 text-white',
       customContent: (
         <div className="flex gap-4 mt-4">
           <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2 text-center">
@@ -95,7 +95,7 @@ export default function HomePage() {
       imageUrl: 'https://formulamotors.ru/upload/resize_cache/webp/images/pages/1.webp',
       bgColor: '#0a0a0a',
       textColor: 'text-white',
-      accentColor: 'bg-red-600 hover:bg-red-700 text-white',
+      accentColor: 'bg-red-600/60 backdrop-blur-sm  hover:bg-red-700 text-white',
       customContent: (
         <div className="flex gap-4 mt-4">
           <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2 text-center">
